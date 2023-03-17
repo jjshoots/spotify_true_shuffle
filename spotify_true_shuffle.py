@@ -20,11 +20,10 @@ class Spotify:
             auth_manager=SpotifyOAuth(
                 client_id=os.environ.get("ID"),
                 client_secret=os.environ.get("SECRET"),
-                redirect_uri="http://localhost:8888/callback",
+                redirect_uri="http://0.0.0.0:8888/callback",
                 scope="streaming,user-modify-playback-state,user-read-playback-state,user-read-currently-playing,user-library-read",
             )
         )
-
         # constants
         self.main_playlist_id = main_playlist_id
         self.all_song_uris = self.get_all_uris_from_playlist(main_playlist_id)
