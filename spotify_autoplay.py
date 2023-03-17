@@ -56,7 +56,10 @@ class Spotify:
 
     def update_current_playback(self):
         # get the currently playing song
-        self.current_playback = self.spotify.current_playback()
+        try:
+            self.current_playback = self.spotify.current_playback()
+        except Exception as e:
+            print(e)
 
     def is_playing(self) -> bool:
         # no playback info means no song played for awhile
