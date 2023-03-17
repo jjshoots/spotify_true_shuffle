@@ -64,8 +64,6 @@ class Spotify:
     def play(self):
         this_device = self.get_this_device()
 
-        print("Attempting to play...")
-
         # check that we actually have this device
         if this_device is None:
             print("Failed to play: device not found!")
@@ -96,11 +94,13 @@ if __name__ == "__main__":
 
         # if not playing, continue waiting until play
         if client.is_playing():
+            print("Playing somewhere, ignoring...")
             total_timeout = 0
             continue
 
         # if not playing for more than the takeover time, play
         if total_timeout >= _TIMEOUT_TO_TAKEOVER_:
+            print("Taking over playback...")
             client.play()
             continue
 
