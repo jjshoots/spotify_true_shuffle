@@ -21,6 +21,7 @@ class Spotify:
                 client_secret=os.environ.get("SECRET"),
                 redirect_uri="http://localhost:8888/callback",
                 scope="streaming,user-modify-playback-state,user-read-playback-state,user-read-currently-playing,user-library-read",
+                open_browser=False,
             )
         )
 
