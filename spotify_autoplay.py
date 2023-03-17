@@ -1,11 +1,10 @@
 #!/usr/bin/env python
 from __future__ import annotations
 
+import os
 import time
 
-import os
 import dotenv
-
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 
@@ -13,13 +12,14 @@ _THIS_DEVICE_NAME_ = "Pi Spotify"
 _CHECK_INTERVAL_ = 900
 _TIMEOUT_TO_TAKEOVER_ = 1800
 
+
 class Spotify:
     def __init__(self, this_device_name):
         self.spotify = spotipy.Spotify(
             auth_manager=SpotifyOAuth(
                 client_id=os.environ.get("ID"),
                 client_secret=os.environ.get("SECRET"),
-                redirect_uri="http://0.0.0.0:8888/callback",
+                redirect_uri="http://localhost:8888/callback",
                 scope="streaming,user-modify-playback-state,user-read-playback-state,user-read-currently-playing,user-library-read",
             )
         )
