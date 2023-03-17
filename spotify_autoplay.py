@@ -27,6 +27,9 @@ class Spotify:
         # constants
         self.this_device_name = this_device_name
 
+        # printout
+        print("Initialized Autoplayer")
+
     def get_this_device(self) -> dict | None:
         try:
             devices = self.spotify.devices()

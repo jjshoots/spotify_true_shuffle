@@ -33,7 +33,7 @@ class Spotify:
         self.queued_song = "null"
         self.current_playback = self.spotify.current_playback()
 
-        print(f"Initialized with {len(self.all_song_uris)} songs.")
+        print(f"Initialized True Shuffle with {len(self.all_song_uris)} songs.")
 
     def get_all_uris_from_playlist(self, playlist_id) -> list[str]:
         # returns all uris in the playlist as a list of string
