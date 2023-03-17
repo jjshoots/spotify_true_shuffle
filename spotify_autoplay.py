@@ -98,7 +98,8 @@ if __name__ == "__main__":
         time.sleep(_CHECK_INTERVAL_)
 
         # update our status
-        client.update_current_playback()
+        if not client.update_current_playback():
+            continue
 
         # if not playing, continue waiting until play
         if client.is_playing():

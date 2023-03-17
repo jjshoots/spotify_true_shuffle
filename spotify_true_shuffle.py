@@ -47,12 +47,14 @@ class Spotify:
 
         return uris
 
-    def update_current_playback(self):
+    def update_current_playback(self) -> bool:
         # get the currently playing song
         try:
             self.current_playback = self.spotify.current_playback()
+            return True
         except Exception as e:
             print(e)
+            return False
 
     def is_playing(self) -> bool:
         # no playback info means no song played for awhile
@@ -109,7 +111,8 @@ if __name__ == "__main__":
         time.sleep(_CHECK_INTERVAL_)
 
         # update our status
-        client.update_current_playback()
+        if not client.update_current_playback():
+            continue
 
         # override the queue if conditions are right
         if client.is_playing() and client.playback_is_playlist():
