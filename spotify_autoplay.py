@@ -9,7 +9,7 @@ import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 
 _THIS_DEVICE_NAME_ = "Pi Spotify"
-_CHECK_INTERVAL_ = 900
+_CHECK_INTERVAL_ = 300
 _TIMEOUT_TO_TAKEOVER_ = 1800
 
 
