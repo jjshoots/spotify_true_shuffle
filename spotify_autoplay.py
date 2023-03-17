@@ -83,11 +83,12 @@ if __name__ == "__main__":
     dotenv_path = os.path.join(os.path.dirname(__file__), "credentials")
     dotenv.load_dotenv(dotenv_path)
 
-    # initiate the client
+    # initiate the client and test the connection
     client = Spotify(_THIS_DEVICE_NAME_)
+    client.update_current_playback()
 
-    # takeover on restart minus 2 intervals, so we don't immediately take over on reset
-    total_timeout = _TIMEOUT_TO_TAKEOVER_ - _CHECK_INTERVAL_ * 2
+    # restart the timeout
+    total_timeout = 0
 
     while True:
         # sleep a bit

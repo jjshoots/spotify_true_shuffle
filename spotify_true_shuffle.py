@@ -98,6 +98,7 @@ if __name__ == "__main__":
 
     # initiate the client
     client = Spotify(_MAIN_PLAYLIST_ID_)
+    client.update_current_playback()
 
     while True:
         # sleep a bit
