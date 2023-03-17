@@ -19,7 +19,7 @@ class Spotify:
             auth_manager=SpotifyOAuth(
                 client_id=os.environ.get("ID"),
                 client_secret=os.environ.get("SECRET"),
-                redirect_uri="http://0.0.0.0:8888/callback",
+                redirect_uri="http://localhost:8888/callback",
                 scope="streaming,user-modify-playback-state,user-read-playback-state,user-read-currently-playing,user-library-read",
                 open_browser=False,
             )
