@@ -18,8 +18,8 @@ class Spotify:
     def __init__(self, main_playlist_id):
         self.spotify = spotipy.Spotify(
             auth_manager=SpotifyOAuth(
-                client_id="9497b0de1e2f41e494ae5fcf1d73776a",
-                client_secret="dc4e81242daa458aabd21dd5f26981fc",
+                client_id=os.environ.get("ID"),
+                client_secret=os.environ.get("SECRET"),
                 redirect_uri="http://localhost:8888/callback",
                 scope="streaming,user-modify-playback-state,user-read-playback-state,user-read-currently-playing,user-library-read",
             )
