@@ -30,7 +30,7 @@ class Spotify:
 
         # printout
         self.update_current_playback()
-        print("Initialized Autoplayer")
+        print(f"Initialized Autoplayer on device {this_device_name}.")
 
     def get_this_device(self) -> dict | None:
         try:
