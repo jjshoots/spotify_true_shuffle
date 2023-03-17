@@ -33,6 +33,8 @@ class Spotify:
         self.queued_song = "null"
         self.current_playback = self.spotify.current_playback()
 
+        # printout
+        self.update_current_playback()
         print(f"Initialized True Shuffle with {len(self.all_song_uris)} songs.")
 
     def get_all_uris_from_playlist(self, playlist_id) -> list[str]:
@@ -98,7 +100,6 @@ if __name__ == "__main__":
 
     # initiate the client
     client = Spotify(_MAIN_PLAYLIST_ID_)
-    client.update_current_playback()
 
     while True:
         # sleep a bit

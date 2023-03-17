@@ -29,6 +29,7 @@ class Spotify:
         self.this_device_name = this_device_name
 
         # printout
+        self.update_current_playback()
         print("Initialized Autoplayer")
 
     def get_this_device(self) -> dict | None:
@@ -85,7 +86,6 @@ if __name__ == "__main__":
 
     # initiate the client and test the connection
     client = Spotify(_THIS_DEVICE_NAME_)
-    client.update_current_playback()
 
     # restart the timeout
     total_timeout = 0
