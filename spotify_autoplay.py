@@ -54,12 +54,16 @@ class Spotify:
         print("This device not on available devices, likely Raspotify failed!")
         return None
 
-    def update_current_playback(self):
+    def update_current_playback(self) -> bool:
         # get the currently playing song
         try:
             self.current_playback = self.spotify.current_playback()
+            return True
         except Exception as e:
+            print("Failed to get playback.")
             print(e)
+            return False
+
 
     def is_playing(self) -> bool:
         # no playback info means no song played for awhile
