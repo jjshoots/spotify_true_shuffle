@@ -33,6 +33,9 @@ class Spotify:
         self.queued_song = "null"
         self.current_playback = self.spotify.current_playback()
 
+        # we don't wanna replay songs we've already played, so we track the songs played
+        self.unplayed_uri_ids = []
+
         # printout
         self.update_current_playback()
         print(f"Initialized True Shuffle with {len(self.all_song_uris)} songs.")
@@ -84,6 +87,7 @@ class Spotify:
         if queue is None:
             return
 
+        # get all the uris for songs in the current queue
         all_queued_uris = [track["uri"] for track in queue["queue"]]
 
         # if the queued song is not what we queued, add a new one to queue
@@ -93,8 +97,14 @@ class Spotify:
 
         print("Adding to queue...")
 
+        # if no songs are in the unplayed list, reset the list
+        if len(self.unplayed_uri_ids) == 0:
+            self.unplayed_uri_ids = list(range(len(self.all_song_uris)))
+            random.shuffle(self.unplayed_uri_ids)
+
         # queues one song and stores the queued song
-        self.queued_song = random.choice(self.all_song_uris)
+        random_uri_id = self.unplayed_uri_ids.pop(-1)
+        self.queued_song = self.all_song_uris[random_uri_id]
         self.spotify.add_to_queue(self.queued_song)
 
 
