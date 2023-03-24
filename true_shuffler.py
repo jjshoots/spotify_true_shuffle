@@ -3,7 +3,6 @@ from __future__ import annotations
 
 import os
 import random
-import time
 import json
 
 import spotipy
@@ -84,7 +83,7 @@ class TrueShuffler:
 
     def check_add_queue(self):
         try:
-            queue = client.spotify.queue()
+            queue = self.spotify.queue()
         except Exception as e:
             queue = None
             print(e)
