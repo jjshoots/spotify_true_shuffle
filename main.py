@@ -29,7 +29,7 @@ if __name__ == "__main__":
                 continue
 
             # override the queue if conditions are right
-            if client.is_playing() and client.playback_is_playlist():
+            if client.is_playing() and client.playback_is_playlist() and client.is_shuffling():
                 print(f"Playlist being played for {alias}, checking queue...")
                 client.check_add_queue()
             else:

@@ -59,6 +59,10 @@ class TrueShuffler:
         # get the currently playing song
         try:
             self.current_playback = self.spotify.current_playback()
+
+            from pprint import pprint
+            pprint(self.current_playback["shuffle_state"])
+
             return True
         except Exception as e:
             print(e)
@@ -80,6 +84,12 @@ class TrueShuffler:
             self.current_playback["context"]["uri"].split(":")[-1]
             == self.main_playlist_id
         )
+
+    def is_shuffling(self) -> bool:
+        if self.current_playback is None:
+            return False
+
+        return self.current_playback["shuffle_state"]
 
     def check_add_queue(self):
         try:
