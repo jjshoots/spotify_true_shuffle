@@ -10,11 +10,10 @@ import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 
 _CHECK_INTERVAL_ = 180
-_MAIN_PLAYLIST_ID_ = "6LCRCv7hmovwG9hzlqZI7V"
 
 
 class Spotify:
-    def __init__(self, main_playlist_id):
+    def __init__(self):
         self.spotify = spotipy.Spotify(
             auth_manager=SpotifyOAuth(
                 client_id=os.environ.get("ID"),
@@ -26,8 +25,8 @@ class Spotify:
         )
 
         # constants
-        self.main_playlist_id = main_playlist_id
-        self.all_song_uris = self.get_all_uris_from_playlist(main_playlist_id)
+        self.main_playlist_id = os.environ.get("PLAYLIST_ID")
+        self.all_song_uris = self.get_all_uris_from_playlist(os.environ.get("PLAYLIST_ID"))
 
         # runtime variables
         self.queued_song = "null"
@@ -114,7 +113,7 @@ if __name__ == "__main__":
     dotenv.load_dotenv(dotenv_path)
 
     # initiate the client
-    client = Spotify(_MAIN_PLAYLIST_ID_)
+    client = Spotify()
 
     while True:
         # sleep a bit
