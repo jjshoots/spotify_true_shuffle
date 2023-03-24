@@ -59,10 +59,6 @@ class TrueShuffler:
         # get the currently playing song
         try:
             self.current_playback = self.spotify.current_playback()
-
-            from pprint import pprint
-            pprint(self.current_playback["shuffle_state"])
-
             return True
         except Exception as e:
             print(e)
