@@ -23,27 +23,37 @@ class TrueShuffler:
             auth_manager=SpotifyOAuth(
                 client_id=self.credentials["id"],
                 client_secret=self.credentials["secret"],
-                cache_handler=spotipy.CacheFileHandler(cache_path=os.path.join(credentials_dir, ".cache")),
+                cache_handler=spotipy.CacheFileHandler(
+                    cache_path=os.path.join(credentials_dir, ".cache")
+                ),
                 redirect_uri="http://localhost:8888/callback",
                 scope="streaming,user-modify-playback-state,user-read-playback-state,user-read-currently-playing,user-library-read",
                 open_browser=False,
             )
         )
 
-        # get the playlist id and all the songs
-        self.main_playlist_id = self.credentials["playlist_id"]
-        self.all_song_uris = self.get_all_uris_from_playlist(self.main_playlist_id)
+        # get the playlist ids
+        self.playlist_ids = self.credentials["playlist_ids"]
+
+        # get all the ids and list of songs we don't wanna replay
+        self.all_song_uris = dict()
+        self.unplayed_uri_ids = dict()
+        for playlist_id in self.playlist_ids:
+            self.all_song_uris[playlist_id] = self.get_all_uris_from_playlist(
+                playlist_id
+            )
+            self.unplayed_uri_ids[playlist_id] = []
 
         # runtime variables
         self.queued_song = "null"
         self.current_playback = self.spotify.current_playback()
 
-        # we don't wanna replay songs we've already played, so we track the songs played
-        self.unplayed_uri_ids = []
-
         # printout
         self.update_current_playback()
-        print(f"Initialized True Shuffle with {len(self.all_song_uris)} songs for {self.alias}.")
+        print(
+            f"Initialized True Shuffle with {len(self.all_song_uris)} playlists for {self.alias},"
+            f"totalling {sum([len(v) for k, v in self.all_song_uris.items()])} songs."
+        )
 
     def get_all_uris_from_playlist(self, playlist_id) -> list[str]:
         # returns all uris in the playlist as a list of string
@@ -76,10 +86,11 @@ class TrueShuffler:
         if self.current_playback is None:
             return False
 
-        return (
-            self.current_playback["context"]["uri"].split(":")[-1]
-            == self.main_playlist_id
-        )
+        return self.current_playlist_id in self.playlist_ids
+
+    @property
+    def current_playlist_id(self):
+        return self.current_playback["context"]["uri"].split(":")[-1]
 
     def is_shuffling(self) -> bool:
         if self.current_playback is None:
@@ -109,11 +120,13 @@ class TrueShuffler:
         print(f"Adding to queue for {self.alias} ...")
 
         # if no songs are in the unplayed list, reset the list
-        if len(self.unplayed_uri_ids) == 0:
-            self.unplayed_uri_ids = list(range(len(self.all_song_uris)))
-            random.shuffle(self.unplayed_uri_ids)
+        if len(self.unplayed_uri_ids[self.current_playlist_id]) == 0:
+            self.unplayed_uri_ids[self.current_playlist_id] = list(
+                range(len(self.all_song_uris[self.current_playlist_id]))
+            )
+            random.shuffle(self.unplayed_uri_ids[self.current_playlist_id])
 
         # queues one song and stores the queued song
-        random_uri_id = self.unplayed_uri_ids.pop(-1)
-        self.queued_song = self.all_song_uris[random_uri_id]
+        random_uri_id = self.unplayed_uri_ids[self.current_playlist_id].pop(-1)
+        self.queued_song = self.all_song_uris[self.current_playlist_id][random_uri_id]
         self.spotify.add_to_queue(self.queued_song)
