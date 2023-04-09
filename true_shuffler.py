@@ -113,7 +113,7 @@ class TrueShuffler:
         all_queued_uris = [track["uri"] for track in queue["queue"]]
 
         # if the queued song is not what we queued, add a new one to queue
-        if self.queued_song in all_queued_uris:
+        if self.queued_song in all_queued_uris[:5]:
             print(f"Queued song already in queue for {self.alias}, skipping add...")
             return
 
