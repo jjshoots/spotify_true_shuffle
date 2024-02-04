@@ -51,7 +51,7 @@ class TrueShuffler:
         # printout
         self.update_current_playback()
         print(
-            f"Initialized True Shuffle with {len(self.all_song_uris)} playlists for {self.alias},"
+            f"Initialized True Shuffle with {len(self.all_song_uris)} playlists for {self.alias}, "
             f"totalling {sum([len(v) for k, v in self.all_song_uris.items()])} songs."
         )
 
