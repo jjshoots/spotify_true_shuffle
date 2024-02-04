@@ -1,0 +1,14 @@
+[Unit]
+Description=Spotify True Shuffle
+After=network.target
+
+[Service]
+User=jet
+WorkingDirectory=/home/jet/Sandboxes/spotify_true_shuffle/
+ExecStart=/bin/bash /home/jet/Sandboxes/spotify_true_shuffle/start.sh
+Restart=always
+RestartSec=30s
+RuntimeMaxSec=12h
+
+[Install]
+WantedBy=multi-user.target
