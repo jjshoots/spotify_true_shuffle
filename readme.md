@@ -44,3 +44,15 @@ If using systemd to automate the scripts, it's necessary to know that systemd's 
 python3 -m pip install -r requirements.txt
 ```
 Or some other funky thing with changing venv.
+
+## Automating with Launchd on macOS
+
+On macOS, use launchd instead of systemd for automating background tasks. This lets our script start automatically.
+
+**Steps**
+
+1. Move the `.plist` file to the `LaunchAgents` directory:
+`mv com.user.spotifytrueshuffle.plist ~/Library/LaunchAgents/`
+
+2. Load the job to schedule your script:
+`launchctl load ~/Library/LaunchAgents/com.user.spotifytrueshuffle.plist`

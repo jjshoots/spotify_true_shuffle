@@ -16,7 +16,9 @@ if __name__ == "__main__":
 
     clients: dict[SpotifyUser, TrueShuffler] = dict()
     for alias in os.listdir(credentials_dir):
-        clients[alias] = TrueShuffler(os.path.join(credentials_dir, alias), alias)
+        full_path = os.path.join(credentials_dir, alias)
+        if os.path.isdir(full_path):  # Check if it's a directory
+            clients[alias] = TrueShuffler(full_path, alias)
 
     while True:
         # sleep a bit
