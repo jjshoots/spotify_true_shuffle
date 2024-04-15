@@ -47,9 +47,13 @@ class TrueShuffler:
 
         # printout
         self.update_current_playback()
+        all_song_ids = {
+            playlist_id: self.get_all_song_ids_from_playlist(playlist_id)
+            for playlist_id in self.playlist_ids
+        }
         print(
-            f"Initialized True Shuffle with {len(self.all_song_ids)} playlists for {self.alias}, "
-            f"totalling {sum([len(v) for k, v in self.all_song_ids.items()])} songs."
+            f"Initialized True Shuffle with {len(all_song_ids)} playlists for {self.alias}, "
+            f"totalling {sum([len(v) for _, v in all_song_ids.items()])} songs."
         )
 
     def get_all_song_ids_from_playlist(self, playlist_id) -> list[SongID]:
