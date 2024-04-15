@@ -1,7 +1,7 @@
 # ignore credentials
 .cache
-credentials
 credentials/
+broken_credentials/
 
 # vim
 .vim/

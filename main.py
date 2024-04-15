@@ -5,9 +5,9 @@ import os
 import time
 
 from true_shuffler import TrueShuffler
+from typings import SpotifyUser
 
-SpotifyUser = str
-_CHECK_INTERVAL_ = 180
+_CHECK_INTERVAL_ = 10
 
 
 if __name__ == "__main__":
