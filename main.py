@@ -20,6 +20,8 @@ if __name__ == "__main__":
         if os.path.isdir(full_path):  # Check if it's a directory
             clients[alias] = TrueShuffler(full_path, alias)
 
+    print(f"Master service started, checking playbacks every {_CHECK_INTERVAL_} seconds...")
+
     while True:
         # sleep a bit
         time.sleep(_CHECK_INTERVAL_)
