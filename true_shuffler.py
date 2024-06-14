@@ -149,7 +149,7 @@ class TrueShuffler:
             return
 
         # if no songs are in the unplayed list, reset the list
-        if len(self.unplayed_song_ids[current_playlist_id]) == 0:
+        if len(self.unplayed_song_ids.get(current_playlist_id, [])) == 0:
             self.unplayed_song_ids[current_playlist_id] = (
                 self.get_all_song_ids_from_playlist(current_playlist_id)
             )
