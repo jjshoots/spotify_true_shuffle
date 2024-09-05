@@ -129,11 +129,11 @@ class TrueShuffler:
         if not queue:
             return
 
-        # get all the uris for songs in the current queue
-        all_queued_uris = [track["uri"] for track in queue["queue"]]
+        # get the first 5 uris for songs in the current queue
+        queued_uris = [track["uri"] for track in queue["queue"][:5]]
 
         # if the most recently queued song is inside the queue just exit for now
-        if self.queued_song in all_queued_uris[:5]:
+        if self.queued_song in queued_uris:
             print(f"Queued song already in queue for {self.alias}, skipping add...")
             return
 
