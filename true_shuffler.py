@@ -95,6 +95,12 @@ class TrueShuffler:
 
         return self.current_playlist_id in self.playlist_ids
 
+    def is_shuffling(self) -> bool:
+        if self.current_playback is None:
+            return False
+
+        return self.current_playback.get("shuffle_state", False)
+
     @property
     def current_playlist_id(self) -> PlaylistID | None:
         # make sure we have playback
@@ -111,12 +117,6 @@ class TrueShuffler:
 
         # return the uri at this point
         return uri.split(":")[-1]
-
-    def is_shuffling(self) -> bool:
-        if self.current_playback is None:
-            return False
-
-        return self.current_playback.get("shuffle_state", False)
 
     def check_add_queue(self) -> None:
         try:
