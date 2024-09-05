@@ -26,9 +26,7 @@ class TrueShuffler:
             auth_manager=SpotifyOAuth(
                 client_id=self.credentials["id"],
                 client_secret=self.credentials["secret"],
-                cache_handler=spotipy.CacheFileHandler(
-                    cache_path=os.path.join(credentials_dir, ".cache")
-                ),
+                cache_handler=spotipy.CacheFileHandler( cache_path=os.path.join(credentials_dir, ".cache") ),
                 redirect_uri="http://localhost:8888/callback",
                 scope="streaming,user-modify-playback-state,user-read-playback-state,user-read-currently-playing,user-library-read",
                 open_browser=False,
@@ -157,6 +155,9 @@ class TrueShuffler:
 
         # queues one song and stores the queued song
         self.queued_song = self.unplayed_song_ids[current_playlist_id].pop(-1)
-        self.spotify.add_to_queue(self.queued_song)
+        try:
+            self.spotify.add_to_queue(self.queued_song)
+            print(f"Added to queue for {self.alias}.")
+        except spotipy.exceptions.SpotifyException as e:
+            print(f"Something went wrong: {e}")
 
-        print(f"Added to queue for {self.alias}.")
