@@ -4,7 +4,6 @@ from __future__ import annotations
 import json
 import os
 import random
-from copy import deepcopy
 
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
