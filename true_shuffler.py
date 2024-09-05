@@ -9,8 +9,9 @@ from copy import deepcopy
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 
-from typings import PlaylistID, SongID
-
+SpotifyUser = str
+SongID = str
+PlaylistID = str
 
 class TrueShuffler:
     def __init__(self, credentials_dir: str, alias: None | str = None):

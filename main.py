@@ -4,10 +4,9 @@ from __future__ import annotations
 import os
 import time
 
-from true_shuffler import TrueShuffler
-from typings import SpotifyUser
+from true_shuffler import TrueShuffler, SpotifyUser
 
-_CHECK_INTERVAL_ = 180
+_CHECK_INTERVAL_ = 10
 
 
 if __name__ == "__main__":
