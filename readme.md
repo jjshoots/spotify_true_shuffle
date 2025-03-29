@@ -23,7 +23,7 @@ The `.json` files must have the following format:
 }
 ```
 
-You can obtain `SPOTIFY_ID` and `SPOTIFY_SECRET` by following [these set of instructions](https://support.heateor.com/get-spotify-client-id-client-secret/).
+You can obtain `SPOTIFY_ID` and `SPOTIFY_SECRET` by following [these set of instructions](https://support.heateor.com/get-spotify-client-id-client-secret/). For redirect URL, use: `http://localhost:8888/callback`.
 To find the Spotify playlist id enter the playlist page, click the (...) button near the play button, and click "Copy Playlist Link" under the Share menu. The playlist id is the string right after `playlist/` and before `?`.
 
 You can add as many playlist IDs for as many playlists that you want true shuffle to be implemented for.
